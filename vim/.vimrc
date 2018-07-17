@@ -43,13 +43,15 @@ Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'chrisbra/csv.vim'
 Bundle 'Keithbsmiley/investigate.vim'
-"Bundle 'alvan/vim-closetag'
+Bundle 'alvan/vim-closetag'
 Bundle 'pangloss/vim-javascript'
 Bundle 'maxmellon/vim-jsx-pretty'
 Bundle 'ryanoasis/vim-devicons'
 Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 Bundle 'mhinz/vim-startify'
 Bundle 'tpope/vim-surround'
+Bundle 'posva/vim-vue'
+Bundle 'w0rp/ale'
 "Bundle 'LucHermitte/lh-vim-lib'
 "Bundle 'LucHermitte/lh-tags'
 "Bundle 'LucHermitte/lh-dev'
@@ -102,7 +104,7 @@ nmap <C-Left> :bp<CR>
 
 nnoremap <C-s> :update<CR>
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js, *.vue"
 
 if has('persistent_undo')
     silent !mkdir ~/.vim/backups > /dev/null 2>&1
@@ -170,6 +172,12 @@ hi IndentGuidesEven ctermbg=darkgray
 hi IndentGuidesOdd  ctermbg=black
 
 
+if v:version >= 700
+  au BufLeave * let b:winview = winsaveview()
+  au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+endif
+
+
 func! Insert_gates()
     let gatename = "_" . substitute(toupper(expand("%:t:r")), "\\.", "_", "g") . "_HEADER_"
     exec "normal! i#ifndef " . gatename
@@ -211,3 +219,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 nmap <F8> :TagbarToggle<CR>
 
+
+:nmap <silent> <C-h> :wincmd h<CR>
+:nmap <silent> <C-j> :wincmd j<CR>
+:nmap <silent> <C-k> :wincmd k<CR>
+:nmap <silent> <C-l> :wincmd l<CR>
+
+
+"let b:ale_fixers = {'javascript': ['eslint'], 'vue': ['eslint']}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
