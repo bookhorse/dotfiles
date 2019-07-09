@@ -30,7 +30,9 @@ URxvt*saveLines: 5000
 !URxvt*font : xft:LiterationMonoPowerline Nerd Font:size=10
 !URxvt*termName:screen-256color
 !URxvt*font:xft:AnonymicePowerline Nerd Font:size=11
-URxvt.font: xft:LiterationMonoPowerline Nerd Font:style=Book:size:12
+!URxvt*font: xft:DejaVu Sans Mono for Powerline:size=11
+!URxvt.font: xft:LiterationMonoPowerline Nerd Font:style=Book:size:12:antialias=true:hinting=true
+URxvt.font: xft:LiterationMono Nerd Font Mono:style=Book
 !URxvt*letterSpace: -2
 URxvt*termName:xterm-256color
 
@@ -62,12 +64,12 @@ URxvt.perl-ext-common:  default
 *color15:    rgb:ff/ff/ff
 
 
-Xft.autohint: 0
-Xft.lcdfilter:  lcdnone
-Xft.hintstyle:  hintslight
-Xft.hinting: 1
-Xft.antialias: 1
-xft.dpi: 100
+!Xft.autohint: 0
+!Xft.lcdfilter:  lcdnone
+!Xft.hintstyle:  hintslight
+!Xft.hinting: 1
+!Xft.antialias: 1
+!xft.dpi: 100
 
 !Xft.rgba: rgb
 

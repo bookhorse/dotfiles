@@ -12,8 +12,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local pomodoro = require("pomodoro")
-pomodoro.init()
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -42,7 +40,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.get_themes_dir() .. "anon/theme.lua")
+beautiful.init( "/home/anon/.config/awesome/themes/anon/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -184,7 +182,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "term", "surf", "dev", "4", "5", "6", "7", "8", "conf" }, s, awful.layout.layouts[1])
+    awful.tag({ "term", "www", "dev", "4", "5", "6", "7", "8", "conf" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -311,6 +309,20 @@ globalkeys = awful.util.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
+
+    awful.key({ modkey }, "XF86AudioRaiseVolume", function ()    
+        awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%", false) end),    
+    awful.key({ modkey }, "XF86AudioLowerVolume", function ()    
+        awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false) end),    
+    awful.key({ modkey }, "XF86AudioMute", function ()    
+        awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle", false) end),  
+
+
+    awful.key({ modkey },"XF86MonBrightnessDown", function () awful.spawn("xbacklight -dec 10") end,
+        {description = "decrease backlight", group = "Backlight"}),
+    awful.key({ modkey },"XF86MonBrightnessUp", function () awful.spawn("xbacklight -inc 10") end,
+{description = "increase backlight", group = "Backlight"}),
+
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -483,7 +495,7 @@ awful.rules.rules = {
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
      { rule = { class = "Firefox" },
-       properties = { screen = 1, tag = "surf" } },
+       properties = { screen = 1, tag = "www" } },
      { rule = { class = "Steam" },
        properties = { screen = 1, tag = "term" } },
      { rule = { class = "Skype" },
@@ -560,3 +572,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+awful.util.spawn("cbatticon")
+awful.util.spawn("nm-applet")
+
+
+

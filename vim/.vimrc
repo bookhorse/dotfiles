@@ -37,6 +37,7 @@ Bundle 'drmikehenry/vim-headerguard'
 Bundle 'hsitz/VimOrganizer'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
+Bundle 'mattn/emmet-vim'
 Bundle 'dleonard0/pony-vim-syntax'
 Bundle 'Shougo/deoplete.nvim'
 Bundle 'godlygeek/tabular'
@@ -50,6 +51,15 @@ Bundle 'ryanoasis/vim-devicons'
 Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 Bundle 'mhinz/vim-startify'
 Bundle 'tpope/vim-surround'
+Bundle 'posva/vim-vue'
+Bundle 'w0rp/ale'
+Bundle 'SirVer/ultisnips'
+
+" Currently, es6 version of snippets is available in es6 branch only
+Bundle 'letientai299/vim-react-snippets', { 'branch': 'es6' }
+Bundle 'honza/vim-snippets'
+
+
 "Bundle 'LucHermitte/lh-vim-lib'
 "Bundle 'LucHermitte/lh-tags'
 "Bundle 'LucHermitte/lh-dev'
@@ -89,7 +99,7 @@ set ignorecase
 "let NERDTreeIgnore=['\.o$']
 let NERDTreeMinimalUI=1
 let NERDTreeSortOrder = ['\/$','\.h$', '\.cpp$', '*', '\.exe$']
-
+let NERDTreeIgnore=['node_modules$']
 
 "let xptemplate_brace_complete=0
 
@@ -110,6 +120,8 @@ if has('persistent_undo')
     set undofile
 endif
 
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+let g:ale_linters = {'vue': ['eslint', 'vls'], 'javascript': ['eslint']}
 "set laststatus=2
 "let g:buftabs_in_statusline=1
 "let g:buftabs_only_basename=1
@@ -210,4 +222,6 @@ map <f2> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 nmap <F8> :TagbarToggle<CR>
+map <silent> <F4> :syntax sync fromstart<CR>
 
+imap cll console.log()<Esc>==f(a
